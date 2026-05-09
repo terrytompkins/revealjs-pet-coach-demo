@@ -1,0 +1,362 @@
+/* =====================================================================
+   Lesson Deck — Presentations as Code
+   Light, professional, healthcare-adjacent theme.
+   Designed to override Reveal.js's "white" theme defaults.
+   ===================================================================== */
+
+:root {
+  --pc-bg:           #f5f8fa;
+  --pc-surface:      #ffffff;
+  --pc-surface-2:    #eef3f6;
+  --pc-border:       #d6e0e8;
+  --pc-ink:          #11202e;
+  --pc-ink-soft:     #3b4d5e;
+  --pc-muted:        #6b7c8c;
+  --pc-accent:       #0f766e;     /* deep teal */
+  --pc-accent-soft:  #ccfbf1;
+  --pc-accent-ink:   #064e3b;
+  --pc-warn:         #b45309;     /* warm gold for emphasis */
+  --pc-warn-soft:    #fef3c7;
+  --pc-link:         #0d6363;
+  --pc-shadow:       0 1px 3px rgba(15,40,60,0.06), 0 8px 24px rgba(15,40,60,0.06);
+}
+
+/* ---------- Reveal core overrides ---------- */
+.reveal,
+.reveal .slides {
+  color: var(--pc-ink);
+  font-family: 'Source Sans Pro', 'Inter', -apple-system, BlinkMacSystemFont,
+               'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+.reveal .slides {
+  text-align: left;
+}
+
+.reveal .slides section {
+  padding: 1.5rem 2rem;
+}
+
+html, body, .reveal-viewport {
+  background: var(--pc-bg) !important;
+}
+
+/* Headings */
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  color: var(--pc-ink);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  margin-bottom: 0.6em;
+  text-shadow: none;
+}
+.reveal h1 { font-size: 2.4em; line-height: 1.1; }
+.reveal h2 { font-size: 1.7em; line-height: 1.15; }
+.reveal h3 { font-size: 1.25em; color: var(--pc-ink-soft); }
+
+.reveal p, .reveal li {
+  color: var(--pc-ink);
+  line-height: 1.45;
+}
+
+.reveal ul { margin-left: 1.2em; }
+.reveal li { margin-bottom: 0.35em; }
+
+.reveal a {
+  color: var(--pc-link);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--pc-link);
+}
+.reveal a:hover { color: var(--pc-accent-ink); border-bottom-style: solid; }
+
+/* Controls and progress in deck colors */
+.reveal .controls { color: var(--pc-accent); }
+.reveal .progress { color: var(--pc-accent); background: rgba(15,118,110,0.1); }
+
+/* ---------- Custom layout primitives ---------- */
+
+/* Eyebrow / kicker label */
+.kicker {
+  display: inline-block;
+  font-size: 0.55em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--pc-accent);
+  font-weight: 700;
+  margin-bottom: 0.6em;
+}
+
+/* Title slide */
+.title-slide {
+  text-align: left;
+}
+.title-slide h1 {
+  font-size: 2.6em;
+  line-height: 1.05;
+  margin-bottom: 0.2em;
+}
+.title-slide .subtitle {
+  font-size: 1.15em;
+  color: var(--pc-ink-soft);
+  font-weight: 500;
+  margin-bottom: 1.4em;
+}
+.title-slide .meta {
+  display: inline-block;
+  padding: 0.35em 0.9em;
+  background: var(--pc-accent-soft);
+  color: var(--pc-accent-ink);
+  border-radius: 999px;
+  font-size: 0.55em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Pull quote */
+.pull-quote {
+  border-left: 4px solid var(--pc-accent);
+  padding: 0.6em 1.2em;
+  margin: 1.2em 0;
+  background: var(--pc-surface);
+  border-radius: 0 12px 12px 0;
+  font-style: italic;
+  color: var(--pc-ink);
+  font-size: 0.85em;
+  box-shadow: var(--pc-shadow);
+}
+
+/* Card grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.9em;
+  margin-top: 1em;
+}
+.card {
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: 12px;
+  padding: 0.8em 1em;
+  box-shadow: var(--pc-shadow);
+}
+.card .card-title {
+  font-weight: 700;
+  color: var(--pc-accent-ink);
+  font-size: 0.85em;
+  margin-bottom: 0.3em;
+}
+.card .card-body {
+  font-size: 0.7em;
+  color: var(--pc-ink-soft);
+  line-height: 1.4;
+}
+
+/* Two-column comparison */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2em;
+  margin-top: 0.8em;
+}
+.compare-card {
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: 14px;
+  padding: 1em 1.2em;
+  box-shadow: var(--pc-shadow);
+}
+.compare-card.alt {
+  background: linear-gradient(180deg, #ffffff 0%, var(--pc-accent-soft) 100%);
+  border-color: var(--pc-accent);
+}
+.compare-card h3 {
+  font-size: 0.95em;
+  margin-bottom: 0.4em;
+  color: var(--pc-accent-ink);
+}
+.compare-card .best-for {
+  font-size: 0.6em;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--pc-muted);
+  margin-bottom: 0.5em;
+}
+.compare-card ul {
+  font-size: 0.7em;
+  margin-left: 1em;
+}
+.compare-card li {
+  margin-bottom: 0.3em;
+}
+
+/* Pipeline / pattern diagram */
+.pipeline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 1em;
+  font-size: 0.7em;
+}
+.pipeline-step {
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: 10px;
+  padding: 0.5em 0.9em;
+  font-weight: 600;
+  color: var(--pc-ink);
+  box-shadow: var(--pc-shadow);
+}
+.pipeline-arrow {
+  color: var(--pc-accent);
+  font-weight: 800;
+  font-size: 1.2em;
+}
+
+/* 2D pattern diagram (horizontal & vertical) */
+.pattern-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5em 0.6em;
+  font-size: 0.65em;
+  margin: 1em auto;
+  max-width: 90%;
+}
+.pattern-grid .cell {
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: 10px;
+  padding: 0.55em 0.7em;
+  text-align: center;
+  font-weight: 600;
+  color: var(--pc-ink);
+  box-shadow: var(--pc-shadow);
+}
+.pattern-grid .cell.main {
+  background: var(--pc-accent-soft);
+  border-color: var(--pc-accent);
+  color: var(--pc-accent-ink);
+}
+.pattern-grid .cell.empty {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.pattern-grid .cell.detail {
+  background: var(--pc-surface);
+  color: var(--pc-ink-soft);
+  font-weight: 500;
+  font-style: italic;
+  border-style: dashed;
+}
+.pattern-legend {
+  display: flex;
+  gap: 1.2em;
+  margin-top: 0.8em;
+  font-size: 0.6em;
+  color: var(--pc-muted);
+}
+.pattern-legend .swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  vertical-align: middle;
+  margin-right: 0.3em;
+}
+.pattern-legend .swatch.main { background: var(--pc-accent-soft); border: 1px solid var(--pc-accent); }
+.pattern-legend .swatch.detail { background: var(--pc-surface); border: 1px dashed var(--pc-border); }
+
+/* Demo transition slide */
+.transition-slide {
+  background: linear-gradient(135deg, #064e3b 0%, #0f766e 100%);
+  color: #ffffff !important;
+  border-radius: 16px;
+  padding: 2.5em 2em !important;
+  text-align: center !important;
+}
+.transition-slide h1, .transition-slide h2, .transition-slide p {
+  color: #ffffff !important;
+}
+.transition-slide .demo-link {
+  display: inline-block;
+  margin-top: 1.2em;
+  padding: 0.7em 1.6em;
+  background: #ffffff;
+  color: var(--pc-accent-ink) !important;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85em;
+  letter-spacing: 0.05em;
+  text-decoration: none !important;
+  border: none !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.transition-slide .demo-link:hover {
+  background: var(--pc-accent-soft);
+  transform: translateY(-1px);
+}
+.transition-slide .meta {
+  display: inline-block;
+  padding: 0.3em 0.8em;
+  background: rgba(255,255,255,0.18);
+  border-radius: 999px;
+  font-size: 0.55em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+  color: #ffffff;
+}
+
+/* Code-ish blocks for ASCII diagrams */
+.reveal .ascii-diagram {
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: 10px;
+  padding: 0.8em 1em;
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.55em;
+  line-height: 1.6;
+  color: var(--pc-ink);
+  white-space: pre;
+  box-shadow: var(--pc-shadow);
+  margin: 0.8em 0;
+  overflow-x: auto;
+}
+
+/* Footer label */
+.deck-footer {
+  position: fixed;
+  bottom: 12px;
+  right: 16px;
+  font-size: 0.7rem;
+  color: var(--pc-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Subtle takeaway list */
+.takeaway-list {
+  list-style: none;
+  margin-left: 0 !important;
+  padding-left: 0;
+}
+.takeaway-list li {
+  background: var(--pc-surface);
+  border-left: 3px solid var(--pc-accent);
+  padding: 0.55em 0.9em;
+  border-radius: 0 8px 8px 0;
+  margin-bottom: 0.5em;
+  box-shadow: var(--pc-shadow);
+  font-size: 0.85em;
+}
+
+/* Print-friendly */
+@media print {
+  .deck-footer { display: none; }
+}

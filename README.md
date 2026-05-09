@@ -1,55 +1,98 @@
-# Promptly-at-9 Reveal.js Prompt Pack
+# Promptly-at-9 — Reveal.js Two-Deck Session
 
-This prompt pack contains Claude Code prompts for creating two Reveal.js decks for a Promptly-at-9 AI class.
+Two Reveal.js decks plus the prompts that produced them, prepared for an internal Promptly-at-9 AI class.
 
-## Session concept
+The session topic is **Presentations as Code: Using Claude Code + Reveal.js to Build Adaptive Product Walkthroughs**. The point of the class is that AI coding agents make software-shaped tools — Reveal.js being one good example — newly practical for non-front-end specialists doing product, design, architecture, and leadership work.
 
-**Presentations as Code: Using Claude Code + Reveal.js to Build Adaptive Product Walkthroughs**
-
-The class uses a two-deck structure:
-
-1. **Lesson deck**  
-   Explains the technique, why Reveal.js matters, how AI coding agents expand the set of tools people can use, and when this approach is better or worse than linear slide tools.
-
-2. **Pet Coach user journey demo deck**  
-   A generated Reveal.js artifact that models a product journey. Horizontal slides show the quick path; vertical slides provide optional deep dives into UX, data, architecture, safety, and prototype UI screens.
-
-## Files
-
-- `claude_code_prompt_lesson_deck.md`  
-  Prompt for Claude Code to create the Promptly-at-9 lesson deck.
-
-- `claude_code_prompt_pet_coach_demo_deck.md`  
-  Prompt for Claude Code to create the Pet Coach Reveal.js user journey demo deck.
-
-## Recommended workflow
-
-1. Create a new empty working folder.
-2. Run Claude Code with `claude_code_prompt_lesson_deck.md`.
-3. Confirm the lesson deck runs locally.
-4. Run Claude Code with `claude_code_prompt_pet_coach_demo_deck.md`.
-5. Confirm the Pet Coach demo deck runs locally.
-6. Wire the lesson deck's "Open Pet Coach Journey Demo" link to the local or hosted demo deck URL.
-7. Use the Pet Coach prompt as a class handout so participants can try generating their own version.
-
-## Suggested final folder layout
+## What's in this repo
 
 ```text
-promptly-revealjs-session/
-  lesson-deck/
-  pet-coach-journey-deck/
-  prompts/
+revealjs-pet-coach-demo/
+  lesson-deck/                  # Teaching artifact — explains the technique
+    index.html
+    css/lesson.css
+  pet-coach-journey-deck/       # Generated demo artifact — the navigable product walkthrough
+    index.html
+    css/pet-coach.css
+  prompts/                      # The prompts used to produce both decks
     claude_code_prompt_lesson_deck.md
     claude_code_prompt_pet_coach_demo_deck.md
+    optional_followup_prompt_polish_and_package.md
+  docs/                         # Mirror of the prompt files (kept for reference)
+  vendor/reveal.js/             # Vendored Reveal.js — both decks share this
   README.md
 ```
 
-## Optional additional artifacts to produce later
+## How to run the decks
 
-These are not strictly required, but may be useful:
+Both decks are static HTML and run by **opening `index.html` directly in a browser**. No server, no `npm install`, no internet connection required. Reveal.js itself is vendored in `vendor/reveal.js/` and shared between the two decks.
 
-- A short "participant handout" explaining the Reveal.js navigation model.
-- A condensed version of the Pet Coach prompt for live demonstration.
-- A follow-up prompt that asks Claude Code to improve visual polish after the first deck is generated.
-- A follow-up prompt that asks Claude Code to publish both decks to GitHub Pages, Vercel, Netlify, or S3.
-- A slide or README section comparing Claude Cowork, Claude Design, Claude Code, PowerPoint, and Reveal.js.
+```text
+# Lesson deck
+open lesson-deck/index.html
+
+# Pet Coach journey deck
+open pet-coach-journey-deck/index.html
+```
+
+If you'd rather present from a local server (so the URL bar looks cleaner and slide hash links behave more like a hosted site), any tiny static server will do:
+
+```text
+# From the repo root, in a terminal:
+npx http-server . -p 8080
+# Then visit:
+#   http://localhost:8080/lesson-deck/
+#   http://localhost:8080/pet-coach-journey-deck/
+```
+
+The lesson deck's demo-handoff slide is wired to `../pet-coach-journey-deck/index.html` and opens in a new tab, so the presenter can return to the lesson deck after the demo for the after-demo reflection slides.
+
+## Reveal.js features the audience will see
+
+The decks are built to demonstrate the framework — not just use it. Watch for:
+
+- **Horizontal + vertical slides.** Left-right is the main path; down is optional depth. Press the right arrow for the journey, the down arrow for a deep dive.
+- **Fragments.** Most lists, cards, and pipelines stage in step by step.
+- **Slide backgrounds and gradients.** The title and demo-handoff slides use thematic gradients.
+- **Auto-animate.** The "Prompting Lessons" pair morphs from bullets into a code excerpt.
+- **Code highlighting with line stepping.** On the prompt-snippet slide, press the right arrow to step the highlighted lines through the code.
+- **Zoom (Alt + Click).** Magnify any element — handy for the prototype phone screens in the Pet Coach deck.
+- **Search ( / ).** Press the slash key to find a slide by keyword.
+- **Speaker view (S).** Notes, timer, and current/next slide in a separate window.
+- **Overview (Esc).** Zoom out to see all slides at once and jump anywhere.
+- **Slide hash links.** Every slide has a permalink — share `index.html#/4/3` and the Pet Coach triage UX prototype opens directly.
+
+## How to present the class
+
+1. **Start in the lesson deck.** Walk slides 1–9 to set up the "presentations as code" idea.
+2. **Hit the demo-handoff slide (slide 10).** Click "Open Pet Coach Journey Demo →" to open the demo in a new tab.
+3. **Walk the Pet Coach deck.** Pick a presenter path before the meeting:
+   - **Executive (~10 min):** stay horizontal, walk steps 1–11, skip vertical stacks.
+   - **Product / UX (~25 min):** descend on the four UI prototype slides — triage chat, scheduling, staff review, follow-up.
+   - **Architecture (~30 min):** descend on chat-to-case handoff, diagnostics workflow, diagnostics-to-Pet-Coach data flow, RAG context assembly.
+4. **Return to the lesson deck.** Continue from the after-demo reflection (slide 11) through takeaways, prompting lessons, and the Reveal.js feature recap.
+5. **Hand out the prompts.** Point participants at `prompts/` so they can adapt the Pet Coach prompt to their own product journey.
+
+## Two-deck strategy
+
+The lesson deck and the Pet Coach deck are intentionally separate:
+
+- The **lesson deck teaches the technique**.
+- The **Pet Coach deck is the artifact** generated by the technique.
+
+Keeping them separate makes the boundary visible. You can point at the demo deck and say "that whole thing was generated from the prompt in `prompts/claude_code_prompt_pet_coach_demo_deck.md`" — the audience can then read the prompt and the artifact side by side.
+
+## How to adapt the Pet Coach prompt to your own product journey
+
+The Pet Coach prompt at `prompts/claude_code_prompt_pet_coach_demo_deck.md` is structured around four levers any product journey can reuse:
+
+1. **A horizontal main path** — the steps a user takes from start to finish. Replace the 16 Pet Coach steps with the steps in your journey.
+2. **Vertical deep dives per step** — UX prototypes, data deep dives, architecture diagrams, safety/compliance notes. Identify which of your steps benefit from each.
+3. **Reusable visual primitives** — phone frames, chat bubbles, scheduling cards, staff review panels, flow diagrams, timelines. Reuse the CSS in `pet-coach-journey-deck/css/pet-coach.css` and rename for your domain.
+4. **Responsible-AI / safety language** — the Pet Coach prompt names the safety boundaries explicitly. If your domain has compliance or safety stakes, name them just as explicitly.
+
+A useful starting heuristic: once your horizontal journey is sketched, list the verticals you want as `(step name) — (deep-dive type)`. Examples: "Onboarding — Data captured," "First task — Architecture," "Settings — Privacy." The prompt will then have a specific shape to ask the agent for.
+
+## Credits
+
+Reveal.js is vendored from [the official npm package](https://www.npmjs.com/package/reveal.js). License lives at `vendor/reveal.js/LICENSE`.
