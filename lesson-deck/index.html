@@ -28,18 +28,45 @@
            Slide 1: Title
            ============================================================ -->
       <section class="title-slide" data-background-gradient="linear-gradient(135deg, #f5f8fa 0%, #ccfbf1 100%)">
-        <span class="meta">Promptly-at-9 · AI Class</span>
-        <h1>Presentations as Code</h1>
-        <p class="subtitle">Using Claude Code + Reveal.js to build adaptive product walkthroughs.</p>
-        <p style="font-size: 0.65em; color: var(--pc-muted); margin-top: 2em;">
-          A two-deck session: this lesson, plus a generated Pet Coach product journey.
-        </p>
+        <div class="title-grid">
+          <div class="title-content">
+            <span class="meta">Promptly-at-9 · AI Class</span>
+            <h1>Presentations as Code</h1>
+            <p class="subtitle">Using Claude Code + Reveal.js to build adaptive product walkthroughs.</p>
+            <div class="presenter">
+              <span class="presenter-name">Terry Tompkins</span>
+              <span class="presenter-date">May 11, 2026</span>
+            </div>
+            <p class="note">A two-deck session: this lesson, plus a generated Pet Coach product journey.</p>
+          </div>
+          <div class="title-art">
+            <div>
+              <div class="lesson-phone">
+                <div class="lp-statusbar"><span>9:41</span><span>●●●●</span></div>
+                <div class="lp-header">
+                  <span class="lp-app">Pet Coach</span>
+                  <span class="lp-screen">Triage · Maple</span>
+                </div>
+                <div class="lp-body">
+                  <div class="lp-bubble owner">Maple has been low energy and eating less today.</div>
+                  <div class="lp-bubble coach">I'm sorry. When did you first notice?</div>
+                  <div class="lp-bubble owner">Since yesterday afternoon.</div>
+                  <div class="lp-bubble coach">Any vomiting, diarrhea, or trouble breathing?</div>
+                  <div class="lp-bubble owner">No, none of those.</div>
+                  <div class="lp-bubble warn">If anything urgent appears, contact your clinic right away.</div>
+                  <div class="lp-input"><span>Reply to Pet Coach…</span><span class="lp-send">Send</span></div>
+                </div>
+              </div>
+              <span class="lp-caption">A glimpse of the demo deck</span>
+            </div>
+          </div>
+        </div>
         <aside class="notes">
-          Welcome the audience. Explain that this session is about using AI coding agents
-          to create presentation artifacts that go beyond linear slides. Frame the
-          structure: this lesson deck, then we switch to a generated Pet Coach product
-          journey deck and treat it like an app demo. Tell the audience the second
-          deck is the artifact — the thing we built using Claude Code.
+          Welcome the audience and introduce yourself (Terry Tompkins, May 11, 2026).
+          Explain that this session is about using AI coding agents to create
+          presentation artifacts that go beyond linear slides. Point at the Pet Coach
+          preview on the right and tell them they'll see the full deck later as a
+          separate, generated artifact — the thing we built using Claude Code.
         </aside>
       </section>
 
@@ -88,11 +115,12 @@
 
       <!-- ============================================================
            Slide 4: What Reveal.js adds
+           Dense card layout — 4 columns × 2 rows.
            ============================================================ -->
-      <section>
+      <section class="dense-cards">
         <span class="kicker">What Reveal.js Adds</span>
         <h2>Web-native, navigable presentation artifacts.</h2>
-        <div class="card-grid">
+        <div class="card-grid cols-4 compact">
           <div class="card fragment fade-up"><div class="card-title">Horizontal main path</div><div class="card-body">Left-to-right is the planned story.</div></div>
           <div class="card fragment fade-up"><div class="card-title">Vertical deep dives</div><div class="card-body">Optional detail under any step.</div></div>
           <div class="card fragment fade-up"><div class="card-title">Speaker notes</div><div class="card-body">Press <code>S</code> for the notes window.</div></div>
@@ -394,8 +422,10 @@ explore details.
 
       <!-- ============================================================
            Slide 14: Takeaways
+           Marked dense-cards so the h2 shrinks and the takeaway
+           list fits comfortably with a proper bottom margin.
            ============================================================ -->
-      <section>
+      <section class="dense-cards">
         <span class="kicker">Takeaways</span>
         <h2>What to carry out of this room.</h2>
         <ul class="takeaway-list">
@@ -415,13 +445,12 @@ explore details.
 
       <!-- ============================================================
            Slide 14b: Reveal.js features used in this deck
-           This slide names the navigation/feature beats so the audience
-           can connect what they just saw to a feature checklist.
+           Dense card layout — 5 columns × 2 rows.
            ============================================================ -->
-      <section>
+      <section class="dense-cards">
         <span class="kicker">Bonus</span>
         <h2>Reveal.js features used in this deck.</h2>
-        <div class="card-grid">
+        <div class="card-grid cols-5 compact">
           <div class="card fragment fade-up"><div class="card-title">Horizontal + vertical slides</div><div class="card-body">The structural backbone of the Pet Coach demo.</div></div>
           <div class="card fragment fade-up"><div class="card-title">Fragments</div><div class="card-body">Most lists, cards, and pipelines stage in step by step.</div></div>
           <div class="card fragment fade-up"><div class="card-title">Slide backgrounds &amp; gradients</div><div class="card-body">The title and demo-handoff slides use thematic gradients.</div></div>

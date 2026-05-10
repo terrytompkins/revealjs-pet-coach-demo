@@ -87,6 +87,24 @@ Use a polished but restrained visual style:
   - Optional depth
   - AI coding agent workflow
 
+### Sizing rules for dense layouts (important)
+
+A 1280×800 Reveal.js slide does **not** scroll. If the content overflows vertically, the bottom is clipped and the audience can't see it. Any layout with many small elements needs deliberate sizing:
+
+- **Card grids with 6+ cards** must use an explicit column count, not `auto-fit` with a generous `minmax`. For 8 cards, use a 4×2 grid; for 9-10 cards, a 5×2 grid. Don't let the grid choose how many columns to use.
+- **Card titles must fit on one (preferably) or two lines.** Three-line wrapping inflates card height and is the most common cause of overflow. Pair a smaller card-title font (≈0.6–0.75em of slide base) with `line-height: 1.15-1.2`.
+- **On dense slides, shrink the h2 a step** (e.g., 1.4em instead of 1.7em) to free vertical room for the cards.
+- **Verify the slide visually after generation.** If a card grid would generate 6+ cards, mentally compute: do all cards fit on the 800px-tall stage with the chosen padding? If not, switch to an explicit grid and reduce typography until they do.
+- **Walk every slide once after the deck is built.** Anything clipped at the bottom edge — even something subtle like a closing paragraph below a list — is a bug, not a styling preference. Tighten or shrink until the bottom of the slide has visible breathing room.
+
+Provide CSS modifier classes (e.g., `.card-grid.cols-4`, `.card-grid.cols-5`, `.card-grid.compact`, `.dense-cards`) so dense slides can opt in without affecting other slides.
+
+### CSS specificity gotcha for custom list components
+
+When you style a `<ul>` with a custom class — for example a `.takeaway-list` whose `<li>`s render as styled cards — the default Reveal.js rule `.reveal ul` (selector `.reveal ul`, specificity 0,1,1) beats your single-class selector (specificity 0,1,0). The native disc bullet markers will leak through and a left margin will offset every list item, so the audience sees both bullets *and* your custom card styling.
+
+Always declare `list-style: none !important;`, `margin-left: 0 !important;`, and `padding-left: 0 !important;` on any custom-styled list class. This is one of the most common visual bugs when authoring Reveal.js content.
+
 ---
 
 ## Lesson deck outline

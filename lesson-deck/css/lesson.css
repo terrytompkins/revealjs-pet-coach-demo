@@ -91,15 +91,15 @@ html, body, .reveal-viewport {
   text-align: left;
 }
 .title-slide h1 {
-  font-size: 2.6em;
+  font-size: 2.4em;
   line-height: 1.05;
   margin-bottom: 0.2em;
 }
 .title-slide .subtitle {
-  font-size: 1.15em;
+  font-size: 1.05em;
   color: var(--pc-ink-soft);
   font-weight: 500;
-  margin-bottom: 1.4em;
+  margin-bottom: 1em;
 }
 .title-slide .meta {
   display: inline-block;
@@ -109,6 +109,153 @@ html, body, .reveal-viewport {
   border-radius: 999px;
   font-size: 0.55em;
   letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Title slide 2-column layout: text left, app preview right. */
+.title-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1.4em;
+  align-items: center;
+}
+.title-grid .title-content { min-width: 0; }
+.title-grid .title-art {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Presenter line — name + date */
+.title-slide .presenter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7em;
+  margin-top: 0.2em;
+  margin-bottom: 0.9em;
+  padding: 0.5em 0.8em;
+  border-left: 3px solid var(--pc-accent);
+  background: rgba(255,255,255,0.6);
+  border-radius: 0 8px 8px 0;
+  width: fit-content;
+}
+.title-slide .presenter-name {
+  font-weight: 700;
+  font-size: 0.85em;
+  color: var(--pc-ink);
+}
+.title-slide .presenter-date {
+  font-size: 0.65em;
+  color: var(--pc-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.title-slide .note {
+  font-size: 0.55em;
+  color: var(--pc-muted);
+  margin-top: 0.4em;
+}
+
+/* Mini phone-frame preview embedded in the title slide.
+   Local to the lesson deck — independent of Pet Coach's own .phone-frame. */
+.lesson-phone {
+  width: 230px;
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 10px 9px 14px;
+  box-shadow: 0 4px 12px rgba(15,40,60,0.10), 0 18px 36px rgba(15,40,60,0.12);
+  border: 1px solid var(--pc-border);
+  transform: rotate(-2deg);
+  transition: transform 0.5s ease;
+}
+.lesson-phone:hover { transform: rotate(0deg) scale(1.02); }
+.lesson-phone .lp-statusbar {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  color: var(--pc-muted);
+  margin-bottom: 5px;
+  padding: 0 4px;
+}
+.lesson-phone .lp-header {
+  background: var(--pc-accent-ink);
+  color: #ffffff;
+  border-radius: 12px 12px 0 0;
+  padding: 0.5em 0.7em;
+  font-size: 8.5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.lesson-phone .lp-header .lp-app { font-weight: 700; }
+.lesson-phone .lp-header .lp-screen { opacity: 0.7; }
+.lesson-phone .lp-body {
+  background: var(--pc-surface-2, #eef3f6);
+  border-radius: 0 0 12px 12px;
+  padding: 0.55em 0.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3em;
+  min-height: 240px;
+}
+.lesson-phone .lp-bubble {
+  font-size: 8.5px;
+  line-height: 1.35;
+  padding: 0.4em 0.6em;
+  border-radius: 11px;
+  max-width: 82%;
+}
+.lesson-phone .lp-bubble.owner {
+  background: var(--pc-accent);
+  color: #ffffff;
+  align-self: flex-end;
+  border-bottom-right-radius: 3px;
+}
+.lesson-phone .lp-bubble.coach {
+  background: #ffffff;
+  color: var(--pc-ink);
+  align-self: flex-start;
+  border-bottom-left-radius: 3px;
+  border: 1px solid var(--pc-border);
+}
+.lesson-phone .lp-bubble.warn {
+  background: var(--pc-warn-soft);
+  border-color: var(--pc-warn);
+  color: var(--pc-warn);
+  align-self: flex-start;
+  font-weight: 600;
+}
+.lesson-phone .lp-input {
+  margin-top: 0.4em;
+  background: #ffffff;
+  border: 1px solid var(--pc-border);
+  border-radius: 999px;
+  padding: 0.3em 0.6em;
+  font-size: 8px;
+  color: var(--pc-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.lesson-phone .lp-input .lp-send {
+  background: var(--pc-accent);
+  color: white;
+  border-radius: 999px;
+  padding: 0.15em 0.5em;
+  font-size: 7.5px;
+  font-weight: 700;
+}
+.lesson-phone .lp-caption {
+  display: block;
+  margin-top: 0.7em;
+  text-align: center;
+  font-size: 0.5em;
+  color: var(--pc-muted);
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   font-weight: 700;
 }
@@ -126,30 +273,63 @@ html, body, .reveal-viewport {
   box-shadow: var(--pc-shadow);
 }
 
-/* Card grid */
+/* Card grid — default (auto-fit). Use modifier classes when card count
+   would otherwise overflow the slide vertically. */
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.9em;
-  margin-top: 1em;
+  gap: 0.7em;
+  margin-top: 0.7em;
 }
+
+/* Modifier: lock to 4 columns × N rows. Use for ~8 cards. */
+.card-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Modifier: lock to 5 columns × N rows. Use for ~10 cards. */
+.card-grid.cols-5 { grid-template-columns: repeat(5, 1fr); }
+
+/* Modifier: tighter padding/typography for dense card layouts. */
+.card-grid.compact .card {
+  padding: 0.55em 0.7em;
+}
+.card-grid.compact .card .card-title {
+  font-size: 0.62em;
+  line-height: 1.15;
+  margin-bottom: 0.25em;
+}
+.card-grid.compact .card .card-body {
+  font-size: 0.5em;
+  line-height: 1.35;
+}
+
 .card {
   background: var(--pc-surface);
   border: 1px solid var(--pc-border);
   border-radius: 12px;
-  padding: 0.8em 1em;
+  padding: 0.7em 0.9em;
   box-shadow: var(--pc-shadow);
 }
 .card .card-title {
   font-weight: 700;
   color: var(--pc-accent-ink);
-  font-size: 0.85em;
+  font-size: 0.7em;
+  line-height: 1.2;
   margin-bottom: 0.3em;
 }
 .card .card-body {
-  font-size: 0.7em;
+  font-size: 0.55em;
   color: var(--pc-ink-soft);
   line-height: 1.4;
+}
+
+/* On dense-card slides, give the heading a touch less vertical weight
+   so the two rows of cards fit comfortably on a 1280×800 stage. */
+.reveal section.dense-cards h2 {
+  font-size: 1.4em;
+  margin-bottom: 0.35em;
+}
+.reveal section.dense-cards .kicker {
+  margin-bottom: 0.25em;
 }
 
 /* Two-column comparison */
@@ -340,20 +520,22 @@ html, body, .reveal-viewport {
   pointer-events: none;
 }
 
-/* Subtle takeaway list */
+/* Subtle takeaway list — !important needed because .reveal ul beats
+   .takeaway-list on specificity for list-style and margin. */
 .takeaway-list {
-  list-style: none;
+  list-style: none !important;
   margin-left: 0 !important;
-  padding-left: 0;
+  padding-left: 0 !important;
 }
 .takeaway-list li {
   background: var(--pc-surface);
   border-left: 3px solid var(--pc-accent);
-  padding: 0.55em 0.9em;
+  padding: 0.45em 0.9em;
   border-radius: 0 8px 8px 0;
-  margin-bottom: 0.5em;
+  margin-bottom: 0.4em;
   box-shadow: var(--pc-shadow);
-  font-size: 0.85em;
+  font-size: 0.7em;
+  line-height: 1.4;
 }
 
 /* Print-friendly */
