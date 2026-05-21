@@ -57,7 +57,7 @@
                   <div class="lp-input"><span>Reply to Pet Coach…</span><span class="lp-send">Send</span></div>
                 </div>
               </div>
-              <span class="lp-caption">A glimpse of the demo deck</span>
+              <span class="lp-caption">Prompts Included</span>
             </div>
           </div>
         </div>
@@ -134,6 +134,119 @@
           Briefly explain the horizontal/vertical navigation model. Left-to-right is
           the main flow. Down is optional detail. Don't dwell on every card — the
           point is to communicate breadth, not to enumerate features.
+        </aside>
+      </section>
+
+      <!-- ============================================================
+           Slide 4b: Diagrams as code — Mermaid live demo
+           Two-panel layout aimed at a developer audience:
+           - Left: scrollable Mermaid source
+           - Right: that source rendered live in the slide
+           ============================================================ -->
+      <section class="code-diagram-slide">
+        <span class="kicker">For the developers in the room</span>
+        <h2>Diagrams as code, rendered live in the slide.</h2>
+        <div class="code-diagram-grid">
+          <div class="panel code-panel">
+            <div class="panel-header">
+              <span>Mermaid source · chat-to-case.mmd</span>
+              <span class="panel-tag">scrollable</span>
+            </div>
+            <div class="panel-body">
+<pre><code class="language-text">%% Pet Coach: chat-to-case handoff
+%% Author: Pet Coach platform team
+flowchart LR
+    subgraph Owner
+      A([Pet Owner Chat])
+    end
+
+    subgraph AI Layer
+      B[AI Triage Service]
+      C[Summary Generator]
+      G[/Guardrail · Audit Log/]
+    end
+
+    subgraph Clinic
+      D[(Clinic Case Record)]
+      E[Staff Review UI]
+    end
+
+    A --&gt; B
+    B --&gt; C
+    C --&gt; D
+    D --&gt; E
+    E -- "staff-confirmed&#10;notes" --&gt; D
+
+    G -. observes .-&gt; B
+    G -. observes .-&gt; C
+    G -. observes .-&gt; D
+
+    classDef ai fill:#ccfbf1,stroke:#0f766e,color:#064e3b;
+    classDef clinic fill:#dbeafe,stroke:#1d4ed8,color:#1d4ed8;
+    classDef safety fill:#fee2e2,stroke:#b91c1c,color:#b91c1c;
+    class B,C ai;
+    class D,E clinic;
+    class G safety;
+</code></pre>
+            </div>
+          </div>
+          <div class="panel diagram-panel">
+            <div class="panel-header">
+              <span>Rendered SVG · mermaid.js</span>
+              <span class="panel-tag">live</span>
+            </div>
+            <div class="panel-body">
+              <pre class="mermaid">
+%% Pet Coach: chat-to-case handoff
+flowchart LR
+    subgraph Owner
+      A([Pet Owner Chat])
+    end
+
+    subgraph AI_Layer["AI Layer"]
+      B[AI Triage Service]
+      C[Summary Generator]
+      G[/Guardrail · Audit Log/]
+    end
+
+    subgraph Clinic
+      D[(Clinic Case Record)]
+      E[Staff Review UI]
+    end
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E -- "staff-confirmed notes" --> D
+
+    G -. observes .-> B
+    G -. observes .-> C
+    G -. observes .-> D
+
+    classDef ai fill:#ccfbf1,stroke:#0f766e,color:#064e3b;
+    classDef clinic fill:#dbeafe,stroke:#1d4ed8,color:#1d4ed8;
+    classDef safety fill:#fee2e2,stroke:#b91c1c,color:#b91c1c;
+    class B,C ai;
+    class D,E clinic;
+    class G safety;
+              </pre>
+            </div>
+          </div>
+        </div>
+        <p class="code-diagram-caption">
+          Same source text. Left panel shows what the author types; right panel shows what the audience sees.
+          Tools like <strong>Mermaid</strong>, <strong>PlantUML</strong>, and <strong>D2</strong> let architecture diagrams
+          live in version control beside the system they describe.
+        </p>
+        <aside class="notes">
+          For a developer audience, this is the "ah-ha" beat. Talk through what Mermaid is —
+          a small DSL for diagrams — and why developers like it: diagrams diff cleanly in git,
+          they update with the system, and there's no separate drawing tool to keep in sync.
+          Mention that PlantUML, D2, and Structurizr fill similar roles. If anyone wants to
+          experiment live, point them at https://mermaid.live to paste the left panel and
+          fiddle with it. The diagram on the right is the same source rendered by the same
+          Mermaid library, embedded directly in this Reveal.js deck.
         </aside>
       </section>
 
@@ -504,6 +617,10 @@ prompts/
   <script src="../vendor/reveal.js/plugin/markdown/markdown.js"></script>
   <script src="../vendor/reveal.js/plugin/zoom/zoom.js"></script>
   <script src="../vendor/reveal.js/plugin/search/search.js"></script>
+
+  <!-- Mermaid.js for the "Diagrams as Code" demo slide -->
+  <script src="../vendor/mermaid/mermaid.min.js"></script>
+
   <script>
     Reveal.initialize({
       hash: true,
@@ -522,6 +639,40 @@ prompts/
       maxScale: 1.6,
       plugins: [ RevealNotes, RevealHighlight, RevealMarkdown, RevealZoom, RevealSearch ]
     });
+
+    // Initialize Mermaid with a light theme that matches the deck palette.
+    // We disable startOnLoad so we control the timing — render after Reveal
+    // has built the slide DOM, otherwise the .mermaid blocks may be
+    // duplicated when Reveal clones slides for backgrounds/overview mode.
+    if (window.mermaid) {
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: 'base',
+        themeVariables: {
+          background: '#ffffff',
+          primaryColor: '#ffffff',
+          primaryTextColor: '#11202e',
+          primaryBorderColor: '#d6e0e8',
+          lineColor: '#3b4d5e',
+          secondaryColor: '#eef3f6',
+          tertiaryColor: '#f5f8fa',
+          fontFamily: "'Source Sans Pro', 'Inter', system-ui, sans-serif",
+          fontSize: '16px',
+          clusterBkg: '#f5f8fa',
+          clusterBorder: '#d6e0e8'
+        },
+        flowchart: { curve: 'basis', padding: 12, htmlLabels: true },
+        securityLevel: 'loose'
+      });
+
+      Reveal.on('ready', () => {
+        try {
+          mermaid.run({ querySelector: '.mermaid' });
+        } catch (e) {
+          console.error('Mermaid render error:', e);
+        }
+      });
+    }
   </script>
 </body>
 </html>

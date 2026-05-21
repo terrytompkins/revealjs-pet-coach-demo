@@ -93,21 +93,24 @@ html, body, .reveal-viewport { background: var(--pc-bg) !important; }
 .phase-during { background: var(--pc-accent-soft); color: var(--pc-accent-ink); }
 .phase-after  { background: var(--pc-warn-soft);  color: var(--pc-warn); }
 
-/* "Press ↓ for details" cue on parents with verticals */
+/* "Press ↓ for details" cue on parents with verticals.
+   Pinned to the very bottom edge with a small physical footprint
+   so it can't collide with body text even when step-body wraps to
+   3+ lines. */
 .vertical-hint {
   position: absolute;
-  bottom: 1rem;
+  bottom: 0;
   right: 1.5rem;
   display: inline-flex;
   align-items: center;
   gap: 0.4em;
-  font-size: 0.55em;
+  font-size: 0.42em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-weight: 700;
   color: var(--pc-accent);
   background: var(--pc-accent-soft);
-  padding: 0.35em 0.8em;
+  padding: 0.25em 0.7em;
   border-radius: 999px;
   border: 1px solid var(--pc-accent);
   box-shadow: var(--pc-shadow);
@@ -710,8 +713,9 @@ html, body, .reveal-viewport { background: var(--pc-bg) !important; }
   letter-spacing: -0.04em;
 }
 .step-hero .step-body {
-  font-size: 0.85em;
+  font-size: 0.75em;
   color: var(--pc-ink-soft);
+  line-height: 1.4;
 }
 .step-hero .step-body strong { color: var(--pc-ink); }
 
