@@ -538,6 +538,138 @@ html, body, .reveal-viewport {
   line-height: 1.4;
 }
 
+/* =====================================================================
+   Diagrams-as-code demo slide
+   Two side-by-side panels: scrollable source on the left,
+   rendered Mermaid diagram on the right.
+   ===================================================================== */
+.code-diagram-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1em;
+  margin-top: 0.4em;
+  align-items: stretch;
+}
+.panel {
+  background: var(--pc-surface);
+  border: 1px solid var(--pc-border);
+  border-radius: 12px;
+  box-shadow: var(--pc-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;        /* enable shrink inside grid */
+  height: 470px;       /* fixed height keeps both panels aligned */
+}
+.panel-header {
+  background: var(--pc-surface-2);
+  border-bottom: 1px solid var(--pc-border);
+  padding: 0.4em 0.9em;
+  font-size: 0.5em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--pc-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.panel-header .panel-tag {
+  font-size: 0.85em;
+  background: var(--pc-accent-soft);
+  color: var(--pc-accent-ink);
+  border-radius: 999px;
+  padding: 0.15em 0.55em;
+  letter-spacing: 0.08em;
+}
+.panel-body {
+  flex: 1 1 auto;
+  overflow: auto;
+  min-height: 0;
+}
+
+/* Scrollable code panel */
+.panel.code-panel .panel-body {
+  padding: 0;
+}
+.panel.code-panel pre {
+  margin: 0;
+  background: #1e2f3a;
+  color: #e6edf3;
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.42em;
+  line-height: 1.55;
+  padding: 0.9em 1em;
+  white-space: pre;
+  min-width: 100%;
+  box-sizing: border-box;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+}
+.panel.code-panel pre code {
+  background: transparent;
+  font-size: inherit;
+  color: inherit;
+  white-space: pre;
+}
+
+/* Custom scrollbar so it doesn't look default-ugly */
+.panel-body::-webkit-scrollbar { width: 8px; height: 8px; }
+.panel-body::-webkit-scrollbar-thumb {
+  background: var(--pc-border);
+  border-radius: 4px;
+}
+.panel-body::-webkit-scrollbar-thumb:hover { background: var(--pc-muted); }
+
+/* Diagram panel — center the rendered Mermaid SVG */
+.panel.diagram-panel .panel-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8em;
+  background: #ffffff;
+}
+.panel.diagram-panel .mermaid {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.panel.diagram-panel .mermaid svg {
+  max-width: 100%;
+  height: auto !important;
+}
+
+/* When mermaid hasn't rendered yet, hide the raw source */
+.panel.diagram-panel .mermaid:not([data-processed="true"]) {
+  font-size: 0.45em;
+  color: var(--pc-muted);
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  white-space: pre;
+  text-align: left;
+  padding: 1em;
+  align-self: stretch;
+}
+
+/* Below the two panels — a small caption */
+.code-diagram-caption {
+  font-size: 0.6em;
+  color: var(--pc-ink-soft);
+  margin-top: 0.6em;
+  text-align: center;
+}
+
+/* On the dense-cards layout (which this slide uses), make sure the
+   heading takes minimum vertical space so the panels can be ~470px tall. */
+.reveal section.code-diagram-slide h2 {
+  font-size: 1.3em;
+  margin-bottom: 0.3em;
+}
+.reveal section.code-diagram-slide .kicker { margin-bottom: 0.25em; }
+
 /* Print-friendly */
 @media print {
   .deck-footer { display: none; }

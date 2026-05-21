@@ -118,6 +118,7 @@ A 1280×800 Reveal.js slide does **not** scroll. Cards or lists that overflow ve
 - **On dense slides, shrink the h2 a step** (e.g., 1.25em instead of 1.55em) to free vertical room for the cards.
 - **Provide CSS modifier classes** (e.g., `.dense-cards`, `.cols-4`, `.cols-5`, `.compact`) so dense slides can opt in without affecting other slides.
 - **After generating the deck, walk every slide once.** Anything that gets clipped at the bottom is a bug, not a styling preference. Even a subtle case — a closing paragraph below a list — counts.
+- **Absolute-positioned corner badges** (e.g., a "↓ Optional deep dive" hint pinned to the bottom-right of every parent slide) sit on a layer above the slide content and *can overlap body text* on slides where text wraps further than expected. Pin them as close to the slide edge as the deck footer allows (e.g., `bottom: 0.3rem` rather than `1rem`), and keep their padding/font small so their physical footprint is modest. If a slide's body text legitimately reaches the bottom-right corner, the badge will still overlap — design the slide so the corner stays empty.
 
 ### CSS specificity gotcha for custom list components
 

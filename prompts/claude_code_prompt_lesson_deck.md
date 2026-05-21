@@ -192,6 +192,34 @@ Briefly explain the horizontal/vertical navigation model. Left-to-right is the m
 
 ---
 
+### Slide 4b: Diagrams as code — live Mermaid demo
+
+This slide is aimed at the developer subset of the audience and demonstrates that Reveal.js can render diagrams from text-based DSLs (Mermaid, PlantUML, D2) live inside the slide.
+
+Title:
+
+**Diagrams as code, rendered live in the slide.**
+
+Layout:
+
+Two side-by-side panels, fixed height (~470px), both with rounded headers and bodies.
+
+- **Left panel** ("Mermaid source · chat-to-case.mmd"): a vertically- and horizontally-scrollable `<pre><code>` block containing readable Mermaid source. Dark background, monospace font, small line-height. The source should be the Pet Coach chat-to-case handoff so it ties back to the existing architecture content.
+- **Right panel** ("Rendered SVG · mermaid.js"): a `<pre class="mermaid">` containing the same Mermaid source, rendered live by the Mermaid library as an inline SVG.
+
+Beneath the two panels, a one-line caption explaining the demo and naming sibling tools (Mermaid, PlantUML, D2).
+
+Technical wiring:
+
+- Vendor Mermaid locally at `vendor/mermaid/mermaid.min.js` (≈3.3MB from `npm pack mermaid@10`). Do not load from a CDN.
+- Initialize Mermaid with `startOnLoad: false`, a theme matching the deck palette, and `securityLevel: 'loose'`.
+- Render after Reveal's `ready` event by calling `mermaid.run({ querySelector: '.mermaid' })`. Mermaid sets `data-processed="true"` on each rendered element, so re-runs are idempotent.
+
+Speaker note:
+For a developer audience this is the "ah-ha" beat. Talk through what Mermaid is — a small DSL for diagrams — and why developers like it: diagrams diff cleanly in git, they update with the system, and there's no separate drawing tool to keep in sync. Mention PlantUML, D2, and Structurizr as siblings. Point at https://mermaid.live as a playground.
+
+---
+
 ### Slide 5: The key pattern
 
 Title:
